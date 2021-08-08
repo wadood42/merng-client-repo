@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { FOLLOW, GET_USER, UNFOLLOW } from "../queries/queries";
 import { useMutation, useQuery } from "@apollo/client";
 import { AuthContext } from "../contexts/auth";
@@ -15,6 +15,8 @@ const Profile = ({ match }) => {
   // } = useQuery(GET_USER, {
   //   variables: { userId: user._id },
   // });
+
+  const [fetching, setFetching] = useState(true);
 
   const {
     loading,
@@ -60,12 +62,17 @@ const Profile = ({ match }) => {
         <p>Posts: {currentUser?.getUser.posts.length}</p>
       </div>
       <div className='profile-posts'>
-        {loading && <ClipLoader />}
         <h1>
           {currentUser?.getUser.username[0].toUpperCase() +
             currentUser?.getUser.username.substring(1)}{" "}
           posts
         </h1>
+        {loading && (
+          <div className='loading-container'>
+            {" "}
+            <ClipLoader />
+          </div>
+        )}
         {currentUser?.getUser.posts.map((post) => (
           <Post post={post} key={post._id} />
         ))}
