@@ -1,0 +1,165 @@
+.posts {
+  /* border: 1px solid rebeccapurple; */
+
+  margin: 10px;
+}
+
+.posts h1 {
+  /* border: 1px solid red; */
+  font-size: 1.2rem;
+  padding: 0;
+}
+
+.post {
+  /* border: 1px solid rgb(255, 255, 255); */
+  border-radius: 10px;
+  padding: 10px;
+
+  margin: 20px;
+  background-color: white;
+}
+.post-link {
+  /* border: 1px solid red; */
+  padding: 10px;
+}
+
+.post a {
+  display: block;
+  /* border: 1px solid yellow; */
+
+  text-decoration: none;
+}
+
+.post a:hover {
+  background-color: rgb(245, 245, 245);
+}
+.post-username {
+  font-weight: bold;
+  cursor: pointer;
+  /* border: 1px solid red; */
+  padding: 6px;
+}
+.post-username:hover {
+  color: rgb(63, 60, 60);
+  /* background-color: rgb(231, 231, 231); */
+}
+.post-created-at {
+  /* border: 1px solid blue; */
+
+  font-size: 0.7rem;
+  color: rgb(153, 151, 151) !important;
+}
+
+.post-body {
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+.post p {
+  color: rgb(0, 0, 0);
+  /* background-color: rgb(250, 250, 250); */
+}
+
+.post-btns {
+  display: flex;
+  justify-content: space-around;
+}
+
+.post-btns > div {
+  border-radius: 6px;
+  padding: 4px;
+
+  /* padding: 0 20px; */
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  /* border: 1px solid red; */
+}
+
+.like {
+  cursor: pointer;
+}
+
+.like:hover {
+  background-color: rgb(107, 121, 247);
+}
+.comment {
+  cursor: pointer;
+}
+.comment:hover {
+  background-color: rgb(107, 121, 247);
+}
+
+.delete-icon {
+  cursor: pointer;
+}
+.delete-icon:hover {
+  background-color: rgb(107, 121, 247);
+}
+
+.post-btns span {
+  /* border: 1px solid green; */
+
+  padding: 1px 30px;
+  margin-left: 4px;
+  display: block;
+  background-color: rgb(103, 103, 236);
+  border-radius: 6px;
+
+  color: white;
+}
+
+/* CREATE POST STYLE  */
+.create-form {
+  border-radius: 10px;
+  padding: 10px;
+  margin: 20px;
+  background-color: white;
+
+  border: none !important;
+
+  /* border: 1px solid red; */
+}
+
+.create-form h3 {
+  /* border: 1px solid red; */
+  text-align: center;
+
+  font-size: 1.2rem;
+  color: gray;
+  padding: 10px;
+}
+
+.create-post {
+  /* border: 1px solid red !important; */
+
+  display: flex;
+
+  border: none !important;
+}
+
+.create-form textarea {
+  width: 80%;
+  padding: 4px;
+  border-radius: 10px;
+  border: 1px solid rgb(209, 212, 209);
+}
+.create-form input[type="submit"] {
+  /* border: 1px solid red; */
+  border: none;
+  padding: 0 10px;
+  margin-left: 4px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  color: white !important;
+  font-weight: bold;
+  background-color: rgb(103, 103, 236);
+}
+
+.create-form input[type="submit"]:disabled {
+  color: gray !important;
+}
+
+.errors {
+  color: black;
+}
