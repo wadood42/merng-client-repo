@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/Post.css";
+import "../styles/Comment.css";
 // import moment from "moment";
 import { Link } from "react-router-dom";
 import { FaHeart, FaRegCommentDots, FaTrash } from "react-icons/fa";
-import { FETCH_POSTS_QUERY, DELETE_POST, LIKE_POST } from "../queries/queries";
+import {
+  FETCH_POSTS_QUERY,
+  DELETE_POST,
+  LIKE_POST,
+  GET_POST,
+} from "../queries/queries";
 import { useMutation } from "@apollo/client";
 import ClipLoader from "react-spinners";
 import { format } from "timeago.js";
+
+import Comment from "../components/Comment";
 const Post = ({ post }) => {
+  console.log("rendering post");
+  const [showComments, setShowComments] = useState(false);
   const [likePost] = useMutation(LIKE_POST, {
     onCompleted: (likedPost) => {
       console.log("liked post", likedPost);
@@ -15,8 +25,27 @@ const Post = ({ post }) => {
     onError: (err) => {
       console.log("err after liking post", err);
     },
+    update: (cache, { data }) => {
+      console.log("result after liking", data.likePost);
+
+      const newPostFromResponse = data?.likePost;
+      const existingPosts = cache.readQuery({
+        query: FETCH_POSTS_QUERY,
+      });
+
+      console.log("existing posts", existingPosts);
+
+      if (existingPosts && newPostFromResponse) {
+        cache.writeQuery({
+          query: FETCH_POSTS_QUERY,
+          data: {
+            getPosts: [...existingPosts?.getPosts, newPostFromResponse],
+          },
+        });
+      }
+    },
     variables: { postId: post.id },
-    refetchQueries: [{ query: FETCH_POSTS_QUERY }],
+    // refetchQueries: [{ query: GET_POST, variables: { postId: post.id } }],
   });
   const [deletePost, { loading, error }] = useMutation(DELETE_POST, {
     onCompleted: (deletedPost) => {
@@ -50,7 +79,7 @@ const Post = ({ post }) => {
             {post.likes.length}
           </span>
         </div>
-        <div className='comment-icon'>
+        <div className='comment-icon' onClick={() => setShowComments(true)}>
           <span className='comment'>
             <FaRegCommentDots size='12' />
           </span>
@@ -64,6 +93,8 @@ const Post = ({ post }) => {
           </span>
         </div>
       </div>
+
+      {showComments && <Comment post={post} />}
     </div>
   );
 };

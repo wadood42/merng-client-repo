@@ -8,16 +8,6 @@ import ClipLoader from "react-spinners/ClipLoader";
 const Profile = ({ match }) => {
   const { user } = useContext(AuthContext);
 
-  // const {
-  //   loading: authedUserLoading,
-  //   error: authedUserError,
-  //   data: authedUser,
-  // } = useQuery(GET_USER, {
-  //   variables: { userId: user._id },
-  // });
-
-  const [fetching, setFetching] = useState(true);
-
   const {
     loading,
     error,
@@ -69,12 +59,11 @@ const Profile = ({ match }) => {
         </h1>
         {loading && (
           <div className='loading-container'>
-            {" "}
             <ClipLoader />
           </div>
         )}
         {currentUser?.getUser.posts.map((post) => (
-          <Post post={post} key={post._id} />
+          <Post post={post} key={post.id} />
         ))}
       </div>
     </div>

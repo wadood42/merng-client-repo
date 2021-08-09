@@ -32,7 +32,6 @@
       "react-app/jest"
     ]
   },
-  "proxy": "https://graphql-social-615.herokuapp.com/",
   "browserslist": {
     "production": [
       ">0.2%",

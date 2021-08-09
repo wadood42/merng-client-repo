@@ -91,8 +91,15 @@ export const LIKE_POST = gql`
   mutation likePostMutation($postId: ID!) {
     likePost(postId: $postId) {
       body
-      username
       id
+      likes {
+        id
+        author
+      }
+      comments {
+        id
+        body
+      }
     }
   }
 `;
@@ -105,14 +112,15 @@ export const GET_POST = gql`
       createdAt
       comments {
         body
-        username
+        author {
+          username
+        }
         createdAt
       }
       likes {
-        username
+        author
         createdAt
       }
-      username
     }
   }
 `;
@@ -140,6 +148,7 @@ export const GET_USER = gql`
     getUser(userId: $userId) {
       username
       email
+      id
       followers {
         id
         followerId
@@ -149,7 +158,6 @@ export const GET_USER = gql`
         followingId
       }
 
-      id
       posts {
         body
         createdAt
@@ -159,6 +167,7 @@ export const GET_USER = gql`
         }
         comments {
           id
+          body
         }
         author {
           username
@@ -171,6 +180,15 @@ export const GET_USER = gql`
       followings {
         id
       }
+    }
+  }
+`;
+
+export const ADD_COMMENT = gql`
+  mutation addCommentMutation($postId: String!, $body: String!) {
+    createComment(postId: $postId, body: $body) {
+      id
+      body
     }
   }
 `;

@@ -17,7 +17,7 @@ const UsersToFollow = () => {
       <h3 className='header'>Users to Follow</h3>
 
       {data?.getUsers.map((user) => (
-        <div className='user'>
+        <div className='user' key={user.id}>
           <Link
             to={{
               pathname: `/${user.id}`,
